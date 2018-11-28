@@ -1,6 +1,9 @@
+<?php 
+$uri1= $this->uri->segment(1);
+$uri2= $this->uri->segment(2);
+?>
 <footer class="text-center">SPK PENETAPAN KENAIKAN GOLONGAN KARYAWAN &copy; 2018</footer>
   </div>
-
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -13,7 +16,7 @@
       $(document).ready(function() {
         $('#tabeldata').DataTable();
     });
-<?php if(!empty($list_karyawan)){ ?>
+<?php if($uri1==''){ ?>
   var chart1; // globally available
   $(document).ready(function() {
         chart1 = new Highcharts.Chart({
@@ -44,6 +47,17 @@
         });
      });  
 <?php } ?>
-    </script>
+
+
+  $(document).ready(function() {
+    <?php if($uri2=='form_penilaian'){ ?>
+    form_sub_kriteria();
+    <?php } ?>
+  });
+  function form_sub_kriteria(){
+    var id_kriteria = $('#id_kriteria').val();
+    $('#form_sub_kriteria').load('<?php echo base_url();?>kriteria/get_form_sub_kriteria/'+id_kriteria);
+  }
+  </script>
   </body>
 </html>

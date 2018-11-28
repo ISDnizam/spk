@@ -15,22 +15,29 @@ class Karyawan extends CI_Controller{
       template_interface('karyawan/parent', $data);
    }
 
-   function form_karyawan($id_karyawan=false){
-      if($id_karyawan){
+   function form_karyawan($id_user=false){
+      if($id_user){
       $data['title'] = "Edit karyawan";
-      $data['edit'] = $this->GlobalModel->get_karyawan($id_karyawan)->row();
+      $data['edit'] = $this->GlobalModel->get_karyawan($id_user)->row();
       }else{
       $data['title'] = "Tambah karyawan";
       }
       $data['list_golongan'] = $this->GlobalModel->get_data('tbl_golongan')->result();
       $data['list_group_karyawan'] = $this->GlobalModel->get_group_karyawan()->result();
       $karyawan = $this->input->post('karyawan');
+      $user = $this->input->post('user');
       if($karyawan){
-         if($id_karyawan){
-          $this->db->where('id_karyawan', $id_karyawan)->update('tbl_karyawan', $karyawan);
+         if($id_user){
+          $this->db->where('id_user', $id_user)->update('tbl_karyawan', $karyawan);
+          $this->db->where('id_user', $id_user)->update('tbl_users', $user);
           $message= flash_info('Karyawan telah berhasil diupdate','get');
          }else{
+         $user['password'] = md5($user['password']);
+         $user['level'] = 'user';
+         $this->db->insert('tbl_users', $user);
+         $karyawan['id_user'] = $this->db->insert_id();
          $this->db->insert('tbl_karyawan', $karyawan);
+
           $message= flash_info('Karyawan telah berhasil dibuat','get');
          }
 
@@ -40,9 +47,10 @@ class Karyawan extends CI_Controller{
       template_interface('karyawan/form_karyawan', $data);
    }
 
-   function hapus_karyawan($id_karyawan){
-      if($id_karyawan){
-      $this->db->where('id_karyawan', $id_karyawan)->delete('tbl_karyawan');
+   function hapus_karyawan($id_user){
+      if($id_user){
+      $this->db->where('id_user', $id_user)->delete('tbl_karyawan');
+      $this->db->where('id_user', $id_user)->delete('tbl_users');
       $message= flash_info('Karyawan telah berhasil dihapus','get');
       $this->session->set_flashdata('message', $message);
       redirect('karyawan');
