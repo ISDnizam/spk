@@ -30,13 +30,20 @@ class Penilaian extends CI_Controller{
       $penilaian = $this->input->post('penilaian');
       if($penilaian){
         $penilaian['id_user'] = $this->id_user;
-         if($id_penilaian){
+        if($id_penilaian){
           $this->db->where('id_penilaian', $id_penilaian)->update('tbl_penilaian', $penilaian);
           $message= flash_info('Nilai Karyawan telah berhasil diupdate','get');
-         }else{
-         $this->db->insert('tbl_penilaian', $penilaian);
-          $message= flash_info('Nilai Karyawan telah berhasil diinput','get');
-         }
+        }else{
+          $check_nilai = $this->GlobalModel->get_penilaian('','',$penilaian['id_karyawan'], $penilaian['id_sub_kriteria'])->row();
+          if($check_nilai){
+            $message= flash_danger('Nilai untuk sub kriteria tersebut sudah ada','get');
+            $this->session->set_flashdata('message', $message);
+            redirect('penilaian/form_penilaian');
+          }else{
+            $this->db->insert('tbl_penilaian', $penilaian);
+            $message= flash_info('Nilai Karyawan telah berhasil diinput','get');
+          }
+        }
         $this->session->set_flashdata('message', $message);
         redirect('penilaian');
       }

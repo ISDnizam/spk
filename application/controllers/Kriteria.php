@@ -87,7 +87,8 @@ class Kriteria extends CI_Controller{
       }
    }
 
-    function get_form_sub_kriteria($id_kriteria){
+    function get_form_sub_kriteria($id_kriteria, $id_sub_kriteria=false){
+      $data['id_sub_kriteria'] = $id_sub_kriteria; 
       $data['list'] = $this->GlobalModel->get_sub_kriteria('',$id_kriteria)->result();
       $this->load->view('content/kriteria/get_form_sub_kriteria', $data);
     }

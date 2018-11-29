@@ -9,6 +9,7 @@
     <!-- Bootstrap -->
     <link href="<?php echo base_url();?>assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?php echo base_url();?>assets/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <script src="<?php echo base_url();?>assets/js/jquery-1.11.3.min.js"></script>
   </head>
   <body>
   
