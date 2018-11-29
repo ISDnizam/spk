@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2018 at 01:51 AM
+-- Generation Time: Nov 28, 2018 at 01:44 PM
 -- Server version: 10.1.33-MariaDB
 -- PHP Version: 7.2.6
 
@@ -21,19 +21,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `spk`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_aspek_kriteria`
---
-
-CREATE TABLE `tbl_aspek_kriteria` (
-  `id_aspek_kriteria` int(11) NOT NULL,
-  `id_group` int(11) NOT NULL,
-  `id_decision_maker` int(11) NOT NULL,
-  `nama_aspek_kriteria` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -139,15 +126,16 @@ CREATE TABLE `tbl_karyawan` (
   `tahun_masuk` int(11) NOT NULL,
   `masa_kerja` varchar(120) NOT NULL,
   `id_group_karyawan` int(11) NOT NULL,
-  `status_karyawan` enum('aktif','non aktif') NOT NULL DEFAULT 'aktif'
+  `status_karyawan` enum('aktif','non aktif') NOT NULL DEFAULT 'aktif',
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_karyawan`
 --
 
-INSERT INTO `tbl_karyawan` (`id_karyawan`, `nik`, `nama_karyawan`, `jenis_kelamin`, `id_golongan`, `tahun_masuk`, `masa_kerja`, `id_group_karyawan`, `status_karyawan`) VALUES
-(1, 23233232, 'Khoirun Nisa', 'Perempuan', 8, 2019, '2 tahun', 2, 'aktif');
+INSERT INTO `tbl_karyawan` (`id_karyawan`, `nik`, `nama_karyawan`, `jenis_kelamin`, `id_golongan`, `tahun_masuk`, `masa_kerja`, `id_group_karyawan`, `status_karyawan`, `id_user`) VALUES
+(4, 200120091, 'Nisa Khoirun', 'Perempuan', 8, 2016, '2 tahun', 7, 'aktif', 4);
 
 -- --------------------------------------------------------
 
@@ -172,6 +160,27 @@ INSERT INTO `tbl_kriteria` (`id_kriteria`, `kode_kriteria`, `nama_kriteria`, `pr
 (2, 'K-2', 'ASPEK UMUM', 2, 1),
 (3, 'K-3', 'ASPEK MUTU PELAYANAN', 1, 1),
 (4, 'K-4', 'ASPEK KEHADIRAN', 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_penilaian`
+--
+
+CREATE TABLE `tbl_penilaian` (
+  `id_penilaian` int(11) NOT NULL,
+  `id_karyawan` int(11) NOT NULL,
+  `id_sub_kriteria` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_penilaian`
+--
+
+INSERT INTO `tbl_penilaian` (`id_penilaian`, `id_karyawan`, `id_sub_kriteria`, `nilai`, `id_user`) VALUES
+(3, 4, 2, 60, 5);
 
 -- --------------------------------------------------------
 
@@ -244,7 +253,10 @@ CREATE TABLE `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id_user`, `username`, `email`, `password`, `status`, `level`) VALUES
-(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'aktif', 'admin');
+(1, 'admin', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'aktif', 'admin'),
+(4, '200120091', 'nis@gmail.com', 'f26d48217b8d17dbdbb1d1b760fcc43f', 'aktif', 'user'),
+(5, '20001929', 'pdm@gmail.com', '0eb910c6957ed1a3eaec041211193c6f', 'aktif', 'pdm'),
+(6, '2200120037', 'dir@gmail.com', 'd734cb33810bfcbcb31628823f76dc91', 'aktif', 'direksi');
 
 --
 -- Indexes for dumped tables
@@ -285,6 +297,12 @@ ALTER TABLE `tbl_karyawan`
 --
 ALTER TABLE `tbl_kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
+
+--
+-- Indexes for table `tbl_penilaian`
+--
+ALTER TABLE `tbl_penilaian`
+  ADD PRIMARY KEY (`id_penilaian`);
 
 --
 -- Indexes for table `tbl_sub_kriteria`
@@ -330,25 +348,31 @@ ALTER TABLE `tbl_group_karyawan`
 -- AUTO_INCREMENT for table `tbl_karyawan`
 --
 ALTER TABLE `tbl_karyawan`
-  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_karyawan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_penilaian`
+--
+ALTER TABLE `tbl_penilaian`
+  MODIFY `id_penilaian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_sub_kriteria`
 --
 ALTER TABLE `tbl_sub_kriteria`
-  MODIFY `id_sub_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_sub_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
