@@ -65,7 +65,7 @@ class GlobalModel extends CI_Model{
       $data = $this->db->get();
       return $data;
    }
-   public function get_penilaian($id_penilaian=false, $level=false, $id_karyawan=false, $id_sub_kriteria=false){
+   public function get_penilaian($id_penilaian=false, $level=false, $id_karyawan=false, $id_sub_kriteria=false, $id_kriteria=false){
       $this->db->select('*');
       $this->db->from('tbl_penilaian');
       $this->db->join('tbl_karyawan', 'tbl_karyawan.id_karyawan=tbl_penilaian.id_karyawan');
@@ -80,6 +80,9 @@ class GlobalModel extends CI_Model{
       }
       if($id_sub_kriteria){
       $this->db->where('tbl_penilaian.id_sub_kriteria', $id_sub_kriteria);
+      }
+      if($id_kriteria){
+      $this->db->where('tbl_kriteria.id_kriteria', $id_kriteria);
       }
       if($level=='pdm'){
       $this->db->where('tbl_kriteria.id_kriteria', 1);

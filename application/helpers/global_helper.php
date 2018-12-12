@@ -1,16 +1,35 @@
 <?php
 
-if (!function_exists('normalisasi')) {
-  function normalisasi($id_karyawan, $id_kriteria, $nilai_normalisasi, $bobot_normalisasi){
-	$CI = & get_instance();
-		$where['id_karyawan']= $id_karyawan;
-		$where['id_kriteria']= $id_kriteria;
-		$rangking['nilai_normalisasi']= $nilai_normalisasi;
-		$rangking['bobot_normalisasi']= $bobot_normalisasi;
-        $CI->db->where($where)->update('rangking', $rangking);
-		return true;
+
+
+	if (!function_exists('get_nilai_per_kriteria')) {
+	  function get_nilai_per_kriteria($id_kriteria, $id_karyawan){
+		$CI = & get_instance();
+	    $nilai_per_kriteria=$CI->db->query("SELECT sum(tbl_penilaian.nilai) as jumlah_nilai FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria." and  tbl_penilaian.id_karyawan=".$id_karyawan."")->row();
+		$total_sub_kriteria = $CI->GlobalModel->get_sub_kriteria('',$id_kriteria)->num_rows();
+		$result = $nilai_per_kriteria->jumlah_nilai/$total_sub_kriteria;
+		return $result;
+		}
 	}
-}
+		if (!function_exists('get_pembagi')) {
+	  function get_pembagi($id_kriteria){
+		$CI = & get_instance();
+	    $nilai_per_kriteria=$CI->db->query("SELECT sum(tbl_penilaian.nilai) as jumlah_nilai FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria."")->row();
+		$total_sub_kriteria = $CI->GlobalModel->get_sub_kriteria('',$id_kriteria)->num_rows();
+		$result = $nilai_per_kriteria->jumlah_nilai/$total_sub_kriteria;
+		// $result = round(sqrt($result),3);
+		return $result;
+		}
+	}
+
+
+	if (!function_exists('get_nilai_per_sub_kriteria')) {
+	  function get_nilai_per_sub_kriteria($id_sub_kriteria, $id_karyawan){
+		$CI = & get_instance();
+	    $query=$CI->db->query("SELECT sum(tbl_penilaian.nilai) as jumlah_nilai FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_sub_kriteria=".$id_sub_kriteria." and  tbl_penilaian.id_karyawan=".$id_karyawan."")->row();
+		return $query;
+		}
+	}
 
 	if (!function_exists('get_max')) {
 		function get_max($id_kriteria){
@@ -28,21 +47,6 @@ if (!function_exists('normalisasi')) {
 			}
 	}
 
-	if (!function_exists('read_hasil_kandidat')) {
-		function read_hasil_karyawan($id_karyawan){
-				$CI = & get_instance();
-		        $query=$CI->db->query("SELECT sum(bobot_normalisasi) as bobot_normalisasi FROM rangking WHERE id_karyawan=".$id_karyawan."")->row();
-				return $query;
-			}
-	}
-	if (!function_exists('set_hasil_karyawan')) {
-		function set_hasil_karyawan($id_karyawan,$nilai_karyawan){
-				$CI = & get_instance();
-				$karyawan['nilai_karyawan'] = $nilai_karyawan;
-        		$CI->db->where('id_karyawan', $id_karyawan)->update('karyawan', $karyawan);
-				return true;
-			}
-	}
 	if (!function_exists('flash_info')) {
    function flash_info($value,$type=false){
       $alert = '
