@@ -27,11 +27,10 @@
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <label for="kt">Group</label>
-            <select name="kriteria[id_group]"  class="form-control" >
-              <?php foreach ($list_group as $key) { ?>
-              <option value="<?php echo $key->id_group;?>"  <?php if(!empty($edit)){  if($edit->id_group==$key->id_group){ echo 'selected'; } } ?>><?php echo $key->nama_group; ?></option>
-              <?php } ?>
+            <label for="kt">Aspek</label>
+            <select name="kriteria[id_groupaspek]"  class="form-control" >
+              <option value="1"  <?php if(!empty($edit)){  if($edit->id_groupaspek==1){ echo 'selected'; } } ?>>Kemuhammadiyahan</option>
+              <option value="2"  <?php if(!empty($edit)){  if($edit->id_groupaspek==2){ echo 'selected'; } } ?>>Kinerja</option>
             </select>
           </div>
         </div>

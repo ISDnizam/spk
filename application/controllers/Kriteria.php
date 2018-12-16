@@ -12,7 +12,7 @@ class Kriteria extends CI_Controller{
 
   function index(){
       $data['title'] = "Data Kriteria";
-      $data['list'] = $this->GlobalModel->get_data('tbl_kriteria')->result();
+      $data['list'] = $this->GlobalModel->get_kriteria()->result();
       template_interface('kriteria/parent', $data);
    }
 

@@ -1,5 +1,5 @@
 <?php if(!empty($edit)){
-$form = 'disabled';
+$form = '';
 }else{
 $form ='';
 }  ?>
@@ -43,7 +43,7 @@ $form ='';
       <div class="col-md-6">
         <div class="form-group">
           <label for="kt">Nilai</label>
-          <input type="number" class="form-control" id="kt" name="penilaian[nilai]"  value="<?php if(!empty($edit)){ echo $edit->nilai; }?>" required>
+          <input type="number" class="form-control" id="nilai" name="penilaian[nilai]"  value="<?php if(!empty($edit)){ echo $edit->nilai; }else{ echo 1; }?>" required readonly>
         </div>
       </div>
 
@@ -61,11 +61,24 @@ $form ='';
     form_sub_kriteria();
   });
 
+function check_nilai(id) {
+$.ajax({
+      url: '<?php echo site_url('penilaian/get_nilai'); ?>',
+      type: 'POST',
+      dataType: 'json',
+      data: {id: id},
+    })
+    .done(function(data) {
+      $('#nilai').val(data);
+    })
+}
   function form_sub_kriteria(){
     var id_kriteria = $('#id_kriteria').val();
     <?php if(!empty($edit)){ ?>
+
     $('#form_sub_kriteria').load('<?php echo base_url();?>kriteria/get_form_sub_kriteria/'+id_kriteria+'/<?php echo $edit->id_sub_kriteria;?>');
     <?php }else{ ?>
+    $('#nilai').val(1);
     $('#form_sub_kriteria').load('<?php echo base_url();?>kriteria/get_form_sub_kriteria/'+id_kriteria);
     <?php } ?>
   }

@@ -17,6 +17,7 @@
         <th>Kode</th>
         <th>Nama Kriteria</th>
         <th>Prioritas</th>
+        <th>Aspek</th>
         <th width="100px">Aksi</th>
       </tr>
     </thead>
@@ -27,6 +28,7 @@
           <td><?php echo $key->kode_kriteria; ?></td>
           <td><?php echo $key->nama_kriteria; ?></td>
           <td><?php echo $key->prioritas; ?></td>
+          <td><?php echo $key->name_groupaspek; ?></td>
           <td class="text-center">
             <a href="<?php echo base_url();?>kriteria/form_kriteria/<?php echo $key->id_kriteria; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
             <a href="<?php echo base_url();?>kriteria/hapus_kriteria/<?php echo $key->id_kriteria; ?>" onclick="return confirm('Yakin ingin menghapus data')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> 

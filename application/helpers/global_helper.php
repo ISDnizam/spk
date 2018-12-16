@@ -1,5 +1,63 @@
 <?php
 
+	if (!function_exists('get_count_sub_kriteria')) {
+	  function get_count_sub_kriteria($id_kriteria=false){
+		$CI = & get_instance();
+	    $query=$CI->db->query("SELECT *  FROM tbl_sub_kriteria  WHERE id_kriteria=".$id_kriteria."")->num_rows();
+		return $query;
+		}
+	}
+
+
+	if (!function_exists('update_roc')) {
+		function update_roc($id_sub_kriteria, $bobot_roc){
+			$CI = & get_instance();
+			$data['bobot_roc'] 		   	= $bobot_roc;
+          	$CI->db->where('id_sub_kriteria', $id_sub_kriteria)->update('tbl_sub_kriteria', $data);
+			return true;
+		}
+	}
+
+	if (!function_exists('update_bobot_akhir')) {
+		function update_bobot_akhir($id_kriteria=false, $bobot_akhir){
+			$CI = & get_instance();
+			$data['bobot_akhir'] 		   	= $bobot_akhir;
+          	$CI->db->where('id_kriteria', $id_kriteria)->update('tbl_kriteria', $data);
+			return true;
+		}
+	}
+	if (!function_exists('update_nilai_preferensi')) {
+		function update_nilai_preferensi($id_karyawan, $colomn, $nilai_pref){
+			$CI = & get_instance();
+			$data[$colomn] 		   	= $nilai_pref;
+          	$CI->db->where('id_karyawan', $id_karyawan)->update('tbl_karyawan', $data);
+			return true;
+		}
+	}
+
+
+	if (!function_exists('get_nilai_utility')) {
+	  function get_nilai_utility($id_kriteria){
+		$CI = & get_instance();
+	    $nilai_per_kriteria=$CI->db->query("SELECT sum(tbl_sub_kriteria.bobot_roc) as bobot_roc FROM tbl_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria."")->row();
+		return round($nilai_per_kriteria->bobot_roc,3);
+		}
+	}
+
+
+	if (!function_exists('get_nilai_kriteria')) {
+	  function get_nilai_kriteria($id_kriteria, $id_karyawan){
+		$CI = & get_instance();
+	    $query=$CI->db->query("SELECT  * FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria." and  tbl_penilaian.id_karyawan=".$id_karyawan."")->row();
+		if($query){
+			$nilai = $query->nilai;
+		}else{
+			$nilai = 0;
+		}
+		return $nilai;
+		}
+	}
+
 
 
 	if (!function_exists('get_nilai_per_kriteria')) {
@@ -7,6 +65,9 @@
 		$CI = & get_instance();
 	    $nilai_per_kriteria=$CI->db->query("SELECT sum(tbl_penilaian.nilai) as jumlah_nilai FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria." and  tbl_penilaian.id_karyawan=".$id_karyawan."")->row();
 		$total_sub_kriteria = $CI->GlobalModel->get_sub_kriteria('',$id_kriteria)->num_rows();
+		if(empty($total_sub_kriteria)){
+			$total_sub_kriteria =1;
+		}
 		$result = $nilai_per_kriteria->jumlah_nilai/$total_sub_kriteria;
 		return $result;
 		}
@@ -16,6 +77,9 @@
 		$CI = & get_instance();
 	    $nilai_per_kriteria=$CI->db->query("SELECT sum(tbl_penilaian.nilai) as jumlah_nilai FROM tbl_penilaian join tbl_sub_kriteria on  tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria WHERE tbl_sub_kriteria.id_kriteria=".$id_kriteria."")->row();
 		$total_sub_kriteria = $CI->GlobalModel->get_sub_kriteria('',$id_kriteria)->num_rows();
+		if(empty($total_sub_kriteria)){
+			$total_sub_kriteria =1;
+		}
 		$result = $nilai_per_kriteria->jumlah_nilai/$total_sub_kriteria;
 		// $result = round(sqrt($result),3);
 		return $result;
@@ -31,21 +95,7 @@
 		}
 	}
 
-	if (!function_exists('get_max')) {
-		function get_max($id_kriteria){
-				$CI = & get_instance();
-		        $query=$CI->db->query("SELECT max(nilai_rangking) as nilai_max FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
-				return $query;
-			}
-	}
 
-	if (!function_exists('get_min')) {
-		function get_min($id_kriteria){
-				$CI = & get_instance();
-		        $query=$CI->db->query("SELECT min(nilai_rangking)  as nilai_min FROM rangking WHERE id_kriteria=".$id_kriteria."")->row();
-				return $query;
-			}
-	}
 
 	if (!function_exists('flash_info')) {
    function flash_info($value,$type=false){

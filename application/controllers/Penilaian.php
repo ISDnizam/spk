@@ -34,9 +34,10 @@ class Penilaian extends CI_Controller{
           $this->db->where('id_penilaian', $id_penilaian)->update('tbl_penilaian', $penilaian);
           $message= flash_info('Nilai Karyawan telah berhasil diupdate','get');
         }else{
-          $check_nilai = $this->GlobalModel->get_penilaian('','',$penilaian['id_karyawan'], $penilaian['id_sub_kriteria'])->row();
+          $id_kriteria = $this->GlobalModel->get_sub_kriteria($penilaian['id_sub_kriteria'])->row()->id_kriteria;
+          $check_nilai = $this->GlobalModel->get_penilaian('','',$penilaian['id_karyawan'], '',$id_kriteria)->row();
           if($check_nilai){
-            $message= flash_danger('Nilai untuk sub kriteria tersebut sudah ada','get');
+            $message= flash_danger('Nilai untuk  kriteria tersebut sudah ada','get');
             $this->session->set_flashdata('message', $message);
             redirect('penilaian/form_penilaian');
           }else{
@@ -57,5 +58,20 @@ class Penilaian extends CI_Controller{
       $this->session->set_flashdata('message', $message);
       redirect('penilaian');
       }
+   }
+
+   function get_nilai(){
+    $id_sub_kriteria = $this->input->post('id');
+    $prioritas = $this->GlobalModel->get_sub_kriteria($id_sub_kriteria)->row()->prioritas;
+    if($prioritas==1){
+      $prioritas =4;
+    }elseif($prioritas==2){
+      $prioritas =3;
+    }elseif($prioritas==3){
+      $prioritas =2;
+    }elseif($prioritas==4){
+      $prioritas =1;
+    }
+    echo $prioritas;
    }
 }

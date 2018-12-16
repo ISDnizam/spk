@@ -45,9 +45,16 @@
       <?php if($user->level=='pdm' or $user->level=='direksi'){ ?>
       <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li>
       <?php } ?>
-      <li><a href="#" onclick="alert('Under Development')">Perhitungan Smarter</a></li>
-      <li><a href="#" onclick="alert('Under Development')">Perhitungan Topsis</a></li>
-      <li><a href="#" onclick="alert('Under Development')">Perhitungan Borda</a></li>
+      <li><a href="<?php echo base_url();?>perhitungan/smart">Perhitungan Smarter</a></li>
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perhitungan Topsis </a>
+        <ul class="dropdown-menu">
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kemuhammadiyahan">Kemuhammadiyahan</a></li>
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kinerja">Kinerja</a></li>
+        </ul>
+      </li>
+
+      <li><a href="<?php echo base_url();?>perhitungan/borda">Perhitungan Borda</a></li>
       <li><a href="#" onclick="alert('Under Development')">Check Akurasi</a></li>
 
       <?php if($user->level=='admin'){ ?>
