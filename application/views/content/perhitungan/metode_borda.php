@@ -84,6 +84,15 @@
                 <td></td>
               </tr>
             <?php } ?>
+            <tr>
+              <td colspan="3"><center><b>Bobot Ranking</b></center></td>
+              <?php for($n=1;$n<=10;$n++){ ?>
+              <td><?php echo 10-$n;?></td>
+              <?php } ?>
+              <td><?php echo 0;?></td>
+              <td><?php echo 0;?></td>
+
+            </tr>
           </tbody>
         </table>
       </div>
