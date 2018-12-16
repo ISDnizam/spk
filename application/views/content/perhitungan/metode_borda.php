@@ -9,7 +9,7 @@
               <th rowspan="2" style="vertical-align: middle" class="text-center" width="5%">#</th>
               <th rowspan="2" style="vertical-align: middle" class="text-center"  width="5%">NIP</th>
               <th rowspan="2" style="vertical-align: middle" class="text-center"  width="5%">Alternatif</th>
-              <th colspan="<?php echo count($list_kriteria); ?>" class="text-center"> Rangking</th>
+              <th colspan="10" class="text-center"> Rangking</th>
               <th rowspan="2" style="vertical-align: middle" class="text-center"  width="5%">Poin Borda</th>
               <th rowspan="2" style="vertical-align: middle" class="text-center"  width="5%">Nilai Borda</th>
 
@@ -23,23 +23,36 @@
             </tr>
           </thead>
           <tbody>
-              <?php $no=0; foreach ($list_preferensi_kemuhammadiyahan as $karyawan) { $no++;?>
+              <?php 
+              $no=0; foreach ($list_preferensi_kemuhammadiyahan as $karyawan) {
+               $no++;?>
               <tr>
                 <th><?php echo $no; ?></th>
                 <th><?php echo $karyawan->nik ?></th>
-                <th><?php echo 'A'.$no; ?></th>
+                <th><?php  $alternatif =  'A'.$no; echo $alternatif; 
+                $jumlah_nilai[$alternatif]=0;
+                $total_poin_porda =0;
+                ?></th>
                 <?php
                 for($n=1;$n<=10;$n++){ ?>
                 <td> <?php 
                 if($n==$no){ 
-                  echo $karyawan->nilai_preferensi_kemuhammadiyahan; 
+                  $nilai = $karyawan->nilai_preferensi_kemuhammadiyahan; 
                 }else{ 
-                  echo 0; 
+                  $nilai =0; 
                 }
+                echo $nilai;
                 $bobot_rangking =10-$n;
-                $poin_borda[$no] =  $karyawan->nilai_preferensi_kemuhammadiyahan*$bobot_rangking;?></td>
+                $jumlah_nilai[$alternatif] += $nilai; 
+                if($n==$no){ 
+                $poin_borda[$alternatif] =  $jumlah_nilai[$alternatif]*$bobot_rangking;
+                }
+                ?></td>
                 <?php } ?>
                 </td>
+                <td><?php echo $poin_borda[$alternatif];
+                ?></td>
+                <td></td>
               </tr>
             <?php } ?>
 
@@ -47,11 +60,28 @@
               <tr>
                 <th><?php echo $no; ?></th>
                 <th><?php echo $karyawan->nik ?></th>
-                <th><?php echo 'A'.$no; ?></th>
+                <th><?php  $alternatif =  'A'.$no; echo $alternatif; 
+                $jumlah_nilai[$alternatif]=0;
+                ?></th>
                 <?php
-                for($n=1;$n<=10;$n++){ ?>
-                <td><?php echo $karyawan->nilai_preferensi_kinerja;?></td>
+                for($n=11;$n<=20;$n++){ ?>
+                <td> <?php 
+                if($n==$no){ 
+                  $nilai = $karyawan->nilai_preferensi_kinerja; 
+                }else{ 
+                  $nilai =0; 
+                }
+                echo $nilai;
+                $bobot_rangking =10-$n;
+                $jumlah_nilai[$alternatif] += $nilai; 
+                if($n==$no){ 
+                $poin_borda[$alternatif] =  $jumlah_nilai[$alternatif]*$bobot_rangking;
+                }
+                ?></td>
                 <?php } ?>
+                </td>
+                <td><?php echo $poin_borda[$alternatif];?></td>
+                <td></td>
               </tr>
             <?php } ?>
           </tbody>
