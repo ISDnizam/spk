@@ -54,7 +54,7 @@
         </ul>
       </li>
 
-      <li><a href="<?php echo base_url();?>perhitungan/borda">Perhitungan Borda</a></li>
+      <li><a href="<?php echo base_url();?>perhitungan/borda?type=1">Perhitungan Borda</a></li>
       <li><a href="#" onclick="alert('Under Development')">Check Akurasi</a></li>
 
       <?php if($user->level=='admin'){ ?>

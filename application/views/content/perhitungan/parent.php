@@ -11,7 +11,6 @@
   <li  class="<?php if($type==1){ echo 'active'; }?>"><a href="<?php echo base_url();?>perhitungan/topsis?aspek=<?php echo $aspek;?>&type=1">Medis</a></li>
   <li role="presentation" class="<?php if($type==2){ echo 'active'; }?>"><a href="<?php echo base_url();?>perhitungan/topsis?aspek=<?php echo $aspek;?>&type=2">Non Medis</a></li>
 <?php }elseif($uri2=='borda'){ ?>
-  <li  class="<?php if($type!=1 and $type!=2){ echo 'active'; }?>"><a href="<?php echo base_url();?>perhitungan/borda" >Semua Data</a></li>
   <li  class="<?php if($type==1){ echo 'active'; }?>"><a href="<?php echo base_url();?>perhitungan/borda?type=1">Medis</a></li>
   <li role="presentation" class="<?php if($type==2){ echo 'active'; }?>"><a href="<?php echo base_url();?>perhitungan/borda?type=2">Non Medis</a></li>
 <?php }else{ ?>

@@ -42,6 +42,7 @@ class Perhitungan extends CI_Controller{
       $data['list_karyawan'] = $this->GlobalModel->get_karyawan('', $data['type'], 2)->result();
       $data['list_preferensi_kemuhammadiyahan'] = $this->GlobalModel->get_nilai_preferensi(1,$data['type'])->result();
       $data['list_preferensi_kinerja'] = $this->GlobalModel->get_nilai_preferensi(2,$data['type'])->result();
+      $data['list_poin_borda'] = $this->GlobalModel->get_poin_borda('','', $data['type'])->result();
       $data['category'] = $category;
       template_interface('perhitungan/parent', $data);
    }

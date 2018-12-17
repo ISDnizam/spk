@@ -35,6 +35,24 @@
 		}
 	}
 
+	if (!function_exists('update_poin_borda')) {
+		function update_poin_borda($id_karyawan, $id_groupaspek, $poin_borda){
+			$CI = & get_instance();
+			$data['poin_borda'] = $poin_borda;
+			$data['id_groupaspek'] = $id_groupaspek;
+			$data['id_karyawan'] = $id_karyawan;
+     		$check = $CI->GlobalModel->get_poin_borda($id_karyawan, $id_groupaspek)->row();
+     		if($check){
+          	$CI->db->where(array('id_karyawan' => $id_karyawan, 'id_groupaspek' => $id_groupaspek))->update('tbl_perhitungan_borda', $data);
+     		}else{
+          	$CI->db->insert('tbl_perhitungan_borda', $data);
+     		}
+
+			return true;
+		}
+	}
+
+
 
 	if (!function_exists('get_nilai_utility')) {
 	  function get_nilai_utility($id_kriteria){

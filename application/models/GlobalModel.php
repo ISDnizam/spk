@@ -153,5 +153,27 @@ class GlobalModel extends CI_Model{
       $data = $this->db->get();
       return $data;
    }
+
+
+     public function get_poin_borda($id_karyawan=false, $id_groupaspek=false,$id_group=false){
+      $this->db->select('*');
+      $this->db->from('tbl_perhitungan_borda');
+      $this->db->join('tbl_karyawan', 'tbl_karyawan.id_karyawan=tbl_perhitungan_borda.id_karyawan');
+      $this->db->join('tbl_group_karyawan', 'tbl_group_karyawan.id_group_karyawan=tbl_karyawan.id_group_karyawan');
+      $this->db->join('tbl_group', 'tbl_group.id_group=tbl_group_karyawan.id_group');
+      if($id_karyawan){
+      $this->db->where('tbl_perhitungan_borda.id_karyawan', $id_karyawan);
+      }
+      if($id_groupaspek){
+      $this->db->where('tbl_perhitungan_borda.id_groupaspek', $id_groupaspek);
+      }
+      if($id_group){
+      $this->db->where('tbl_group.id_group', $id_group);
+      }
+      $this->db->order_by('tbl_perhitungan_borda.poin_borda','desc');
+      $this->db->limit(10);
+      $data = $this->db->get();
+      return $data;
+   }
 }
 ?>
