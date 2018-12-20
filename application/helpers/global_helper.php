@@ -1,9 +1,13 @@
 <?php
 
 	if (!function_exists('get_count_sub_kriteria')) {
-	  function get_count_sub_kriteria($id_kriteria=false){
+	  function get_count_sub_kriteria($id_kriteria=false, $method=false){
 		$CI = & get_instance();
+		if($method){
+	    $query=$CI->db->query("SELECT *  FROM tbl_sub_kriteria  WHERE id_kriteria=".$id_kriteria."")->result();
+		}else{
 	    $query=$CI->db->query("SELECT *  FROM tbl_sub_kriteria  WHERE id_kriteria=".$id_kriteria."")->num_rows();
+		}
 		return $query;
 		}
 	}
@@ -158,5 +162,23 @@
 	}
 
 
+
+	if (!function_exists('update_id_karyawan')) {
+		function update_id_karyawan($nik){
+			$CI = & get_instance();
+     		$karyawan  = $CI->GlobalModel->get_karyawan('','',$nik)->row();
+     		if($karyawan){
+     			$id_karyawan = $karyawan->id_karyawan;
+			$data['NIP'] 		   	= $nik;
+     		}else{
+     			$id_karyawan = 999;
+			$data['NIP'] 		   	= $nik;
+     		}
+
+			$data['id_karyawan'] 		   	= $id_karyawan;
+          	$CI->db->insert('tes2', $data);
+			return true;
+		}
+	}
 }
 ?>

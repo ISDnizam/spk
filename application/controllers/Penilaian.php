@@ -20,7 +20,9 @@ class Penilaian extends CI_Controller{
       if($id_penilaian){
       $data['title'] = "Edit Nilai";
       $data['edit'] = $this->GlobalModel->get_penilaian($id_penilaian)->row();
+      $view='form_penilaian_edit';
       }else{
+      $view='form_penilaian';
       $data['title'] = "Input Nilai";
       }
       $user = $this->GlobalModel->get_data('tbl_users', ['id_user' => $this->id_user])->row();
@@ -29,26 +31,24 @@ class Penilaian extends CI_Controller{
       $data['list_sub_kriteria'] = $this->GlobalModel->get_sub_kriteria()->result();
       $penilaian = $this->input->post('penilaian');
       if($penilaian){
-        $penilaian['id_user'] = $this->id_user;
         if($id_penilaian){
           $this->db->where('id_penilaian', $id_penilaian)->update('tbl_penilaian', $penilaian);
           $message= flash_info('Nilai Karyawan telah berhasil diupdate','get');
         }else{
-          $id_kriteria = $this->GlobalModel->get_sub_kriteria($penilaian['id_sub_kriteria'])->row()->id_kriteria;
-          $check_nilai = $this->GlobalModel->get_penilaian('','',$penilaian['id_karyawan'], '',$id_kriteria)->row();
-          if($check_nilai){
-            $message= flash_danger('Nilai untuk  kriteria tersebut sudah ada','get');
-            $this->session->set_flashdata('message', $message);
-            redirect('penilaian/form_penilaian');
-          }else{
-            $this->db->insert('tbl_penilaian', $penilaian);
-            $message= flash_info('Nilai Karyawan telah berhasil diinput','get');
+          $id_karyawan = $this->input->post('id_karyawan');
+          foreach ($data['list_kriteria'] as $key) {
+            $form['nilai'] = $penilaian[$key->id_kriteria]['nilai'];
+            $form['id_sub_kriteria'] = $penilaian[$key->id_kriteria]['id_sub_kriteria'];
+            $form['id_karyawan'] = $id_karyawan;
+            $form['id_user'] = $this->id_user;
+            $this->db->insert('tbl_penilaian', $form);
           }
+          $message= flash_info('Nilai Karyawan telah berhasil diinput','get');
         }
         $this->session->set_flashdata('message', $message);
         redirect('penilaian');
       }
-      template_interface('penilaian/form_penilaian', $data);
+      template_interface('penilaian/'.$view, $data);
    }
 
    function hapus_penilaian($id_penilaian){
@@ -84,6 +84,10 @@ class Penilaian extends CI_Controller{
         $prioritas =1;
         }
       }
+    if($id_sub_kriteria){
     echo $prioritas;
+    }else{
+      echo '0';
+    }
    }
 }
