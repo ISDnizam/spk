@@ -62,16 +62,28 @@ class Penilaian extends CI_Controller{
 
    function get_nilai(){
     $id_sub_kriteria = $this->input->post('id');
+    $id_kriteria = $this->GlobalModel->get_sub_kriteria($id_sub_kriteria)->row()->id_kriteria;
+    $jml_kriteria = get_count_sub_kriteria($id_kriteria);
     $prioritas = $this->GlobalModel->get_sub_kriteria($id_sub_kriteria)->row()->prioritas;
-    if($prioritas==1){
-      $prioritas =4;
-    }elseif($prioritas==2){
-      $prioritas =3;
-    }elseif($prioritas==3){
-      $prioritas =2;
-    }elseif($prioritas==4){
-      $prioritas =1;
-    }
+      if($jml_kriteria==3){
+        if($prioritas==1){
+        $prioritas =3;
+        }elseif($prioritas==2){
+        $prioritas =2;
+        }elseif($prioritas==3){
+        $prioritas =1;
+        }
+      }else{
+        if($prioritas==1){
+        $prioritas =4;
+        }elseif($prioritas==2){
+        $prioritas =3;
+        }elseif($prioritas==3){
+        $prioritas =2;
+        }elseif($prioritas==4){
+        $prioritas =1;
+        }
+      }
     echo $prioritas;
    }
 }
