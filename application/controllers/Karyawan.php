@@ -56,4 +56,8 @@ class Karyawan extends CI_Controller{
       redirect('karyawan');
       }
    }
+    function get_form_karyawan($id_group_karyawan=false){
+      $data['list'] = $this->GlobalModel->get_karyawan('','','',$id_group_karyawan)->result();
+      $this->load->view('content/karyawan/get_form_karyawan', $data);
+    }
 }
