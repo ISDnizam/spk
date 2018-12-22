@@ -16,16 +16,35 @@
       <input type="hidden" name="id_kriteria" value="<?php if(!empty($edit)){ echo $edit->id_kriteria; }?>">
       <div class="row">
         <div class="col-md-12">
+
+
+        <?php if($level=='direksi'){ ?>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="kt">Jabatan</label>
+            <select name="" id="id_group_karyawan"  class="form-control" onchange="show_karyawan(this.value)">
+              <option value="">Pilih Jabatan</option>
+              <?php foreach ($list_group_karyawan as $key) { ?>
+                <option value="<?php echo $key->id_group_karyawan;?>" ><?php echo $key->nama_group_karyawan.' ('.$key->nama_group.')'; ?></option>
+              <?php } ?>
+            </select>
+          </div>
+        </div>
+      <?php } ?>
+
           <div class="col-md-6">
             <div class="form-group">
               <label for="kt">NIK</label>
-              <select name="id_karyawan" class="form-control" <?php echo $form;?>>
-                <?php foreach ($list_karyawan as $key) { ?>
-                  <option value="<?php echo $key->id_karyawan;?>" <?php if(!empty($edit)){  if($edit->id_karyawan==$key->id_karyawan){ echo 'selected'; } } ?>><?php echo $key->nik;?> - <?php echo $key->nama_karyawan;?></option>
-                <?php } ?>
-              </select>
+                <div id="form_karyawan">
+                <select name="id_karyawan" class="form-control" <?php echo $form;?>>
+                  <?php foreach ($list_karyawan as $key) { ?>
+                    <option value="<?php echo $key->id_karyawan;?>" <?php if(!empty($edit)){  if($edit->id_karyawan==$key->id_karyawan){ echo 'selected'; } } ?>><?php echo $key->nik;?> - <?php echo $key->nama_karyawan;?></option>
+                  <?php } ?>
+                </select>
+              </div>
             </div>
           </div>
+
         </div>
         <hr>
       </div>
@@ -98,5 +117,9 @@
       $('#nilai').val(1);
       $('#form_sub_kriteria').load('<?php echo base_url();?>kriteria/get_form_sub_kriteria/'+id_kriteria);
     <?php } ?>
+  }
+
+  function show_karyawan(id){
+    $('#form_karyawan').load('<?php echo base_url();?>karyawan/get_form_karyawan/'+id);
   }
 </script>

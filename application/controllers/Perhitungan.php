@@ -40,7 +40,7 @@ class Perhitungan extends CI_Controller{
       }
       // echo count($data['list_kriteria']);die();
       $data['list_kriteria_prioritas'] = $this->GlobalModel->get_kriteria_by_prioritas()->result();
-      $data['list_karyawan'] = $this->GlobalModel->get_karyawan('', $data['type'], 2)->result();
+      $data['list_karyawan'] = $this->GlobalModel->get_karyawan('', $data['type'])->result();
       $data['list_preferensi_kemuhammadiyahan'] = $this->GlobalModel->get_nilai_preferensi(1,$data['type'],10)->result();
       $data['list_preferensi_kinerja'] = $this->GlobalModel->get_nilai_preferensi(2,$data['type'],10)->result();
       $data['list_poin_borda'] = $this->GlobalModel->get_poin_borda('','', $data['type'])->result();

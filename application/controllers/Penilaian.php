@@ -26,9 +26,12 @@ class Penilaian extends CI_Controller{
       $data['title'] = "Input Nilai";
       }
       $user = $this->GlobalModel->get_data('tbl_users', ['id_user' => $this->id_user])->row();
+      $data['level'] = $user->level;
       $data['list_karyawan'] = $this->GlobalModel->get_karyawan()->result();
       $data['list_kriteria'] = $this->GlobalModel->get_kriteria($user->level)->result();
       $data['list_sub_kriteria'] = $this->GlobalModel->get_sub_kriteria()->result();
+            $data['list_golongan'] = $this->GlobalModel->get_data('tbl_golongan')->result();
+      $data['list_group_karyawan'] = $this->GlobalModel->get_group_karyawan()->result();
       $penilaian = $this->input->post('penilaian');
       if($penilaian){
         if($id_penilaian){
