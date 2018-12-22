@@ -34,8 +34,8 @@
           <td><?php echo $key->nama_group_karyawan.' ('.$key->nama_group.')'; ?></td>
           <td><?php echo $key->status_karyawan; ?></td>
           <td class="text-center">
-            <a href="<?php echo base_url();?>karyawan/form_karyawan/<?php echo $key->id_karyawan; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-            <a href="<?php echo base_url();?>karyawan/hapus_karyawan/<?php echo $key->id_karyawan; ?>" onclick="return confirm('Anda yakin ingin menghapus <?php echo $key->nama_karyawan; ?> sebagai karyawan ?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            <a href="<?php echo base_url();?>karyawan/form_karyawan/<?php echo $key->id_user; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+            <a href="<?php echo base_url();?>karyawan/hapus_karyawan/<?php echo $key->id_user; ?>" onclick="return confirm('Anda yakin ingin menghapus <?php echo $key->nama_karyawan; ?> sebagai karyawan ?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
           </td>
         </tr>
       <?php } ?>
