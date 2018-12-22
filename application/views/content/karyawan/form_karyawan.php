@@ -4,6 +4,9 @@
           <h4><?php echo $title;?></h4>
         </div>
 
+    <div class="col-md-12">
+    <?php echo $this->session->flashdata('message'); ?>
+    </div>
         <form method="post">
           <div class="col-md-6">
             <div class="page-header">
@@ -101,13 +104,30 @@
               <input type="email" class="form-control" id="email" name="user[email]"  value="<?php if(!empty($edit)){ echo $edit->email; }?>" required>
             </div>
           </div>
-          <?php if(empty($edit)){ ?>
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="kt">Password</label>
-              <input type="password" class="form-control" id="password" name="user[password]"  value="<?php if(!empty($edit)){ echo $edit->tahun_masuk; }?>" required>
+          <?php if(!empty($edit)){ ?>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="kt"><a id="show_password" onclick="show_password()" style="cursor:pointer">Ganti Passwrod</a></label>
+              </div>
+            </div>
+
+
+          <div id="form_password" style="display: none">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="kt">Password Baru</label>
+                <input type="password" class="form-control"  name="password"   >
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="kt">Ulangi Password Baru</label>
+                <input type="password" class="form-control"  name="repassword"   >
+              </div>
             </div>
           </div>
+
           <?php } ?>
         </div>
 
@@ -123,5 +143,10 @@
 <script type="text/javascript">
   function set_username(nik){
     $('#username').val(nik);
+  }
+
+  function show_password(){
+    $('#form_password').show();
+    $('#show_password').hide();
   }
 </script>

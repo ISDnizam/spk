@@ -26,8 +26,19 @@ class Karyawan extends CI_Controller{
       $data['list_group_karyawan'] = $this->GlobalModel->get_group_karyawan()->result();
       $karyawan = $this->input->post('karyawan');
       $user = $this->input->post('user');
+      $password = $this->input->post('password');
+      $repassword = $this->input->post('repassword');
       if($karyawan){
          if($id_user){
+          if($password){
+            if($password!=$repassword){
+              $message= flash_danger('Paaword yang anda masukan tidak cocok','get');
+              $this->session->set_flashdata('message', $message);
+              redirect('karyawan/form_karyawan/'.$id_user);
+            }else{
+              $user['password'] = md5($password);
+            }
+          }
           $this->db->where('id_user', $id_user)->update('tbl_karyawan', $karyawan);
           $this->db->where('id_user', $id_user)->update('tbl_users', $user);
           $message= flash_info('Karyawan telah berhasil diupdate','get');
