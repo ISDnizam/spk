@@ -3,7 +3,7 @@
       <h4><?php echo $title;?></h4>
     </div>
     <div class="col-md-6 text-right">
-      <a href="<?php echo base_url();?>penilaian/form_penilaian" class="btn btn-primary">Input Nilai</a>
+      <a href="<?php echo base_url();?>akurasi/form_akurasi" class="btn btn-primary">Input akurasi</a>
     </div>
     <div class="col-md-12">
     <?php echo $this->session->flashdata('message'); ?>

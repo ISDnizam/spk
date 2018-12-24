@@ -16,9 +16,11 @@
         <th width="30px">No</th>
         <th>NIK </th>
         <th>Nama </th>
+        <th>Jabatan</th>
         <th>Kriteria</th>
         <th>Sub Kriteria</th>
         <th>Nilai</th>
+        
         <th width="100px">Aksi</th>
       </tr>
     </thead>
@@ -28,9 +30,11 @@
           <td><?php echo $no++ ?></td>
           <td><?php echo $key->nik; ?></td>
           <td><?php echo $key->nama_karyawan; ?></td>
+          <td><?php echo $key->nama_group_karyawan; ?></td>
           <td><?php echo $key->nama_kriteria; ?></td>
           <td><?php echo $key->nama_sub_kriteria; ?></td>
           <td><?php echo $key->nilai; ?></td>
+          
           <td class="text-center">
             <a href="<?php echo base_url();?>penilaian/form_penilaian/<?php echo $key->id_penilaian; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
             <a href="<?php echo base_url();?>penilaian/hapus_penilaian/<?php echo $key->id_penilaian; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini ?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>

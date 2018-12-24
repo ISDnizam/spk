@@ -76,7 +76,15 @@ class Penilaian extends CI_Controller{
         }elseif($prioritas==3){
         $prioritas =1;
         }
-      }else{
+      }
+      else if ($jml_kriteria==2) {
+        if($prioritas==1){
+        $prioritas =2;
+        }elseif($prioritas==2){
+        $prioritas =1;
+        }
+      }
+      else{
         if($prioritas==1){
         $prioritas =4;
         }elseif($prioritas==2){
