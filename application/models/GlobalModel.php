@@ -42,7 +42,7 @@ class GlobalModel extends CI_Model{
       return $data;
    }
 
-      public function get_karyawan($id_user=false, $id_group=false, $nik=false, $id_group_karyawan=false){
+      public function get_karyawan($id_user=false, $id_group=false, $nik=false, $id_group_karyawan=false, $masa_kerja=false){
          $this->db->select('*');
          $this->db->from('tbl_karyawan');
          $this->db->join('tbl_golongan', 'tbl_golongan.id_golongan=tbl_karyawan.id_golongan');
@@ -51,6 +51,9 @@ class GlobalModel extends CI_Model{
          $this->db->join('tbl_users', 'tbl_users.id_user=tbl_karyawan.id_user');
          if($id_user){
          $this->db->where('tbl_users.id_user', $id_user);
+         }
+         if($masa_kerja){
+         $this->db->where('tbl_karyawan.masa_kerja >=', $masa_kerja);
          }
          if($nik){
          $this->db->where('tbl_karyawan.nik', $nik);
