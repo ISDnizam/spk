@@ -286,7 +286,8 @@
           </td>
           <td> <?php echo $nilai_utility = get_nilai_utility($key->id_kriteria); ?></td>
           <td><?php $nilai_bobot_kriteria[$key->id_kriteria] = round($nilai_utility*$bobot_roc[$key->id_kriteria],3);
-            echo  $nilai_bobot_kriteria[$key->id_kriteria]; ?></td>
+            echo  $nilai_bobot_kriteria[$key->id_kriteria]; 
+            update_bobot_akhir($key->id_kriteria, $nilai_bobot_kriteria[$key->id_kriteria]);?></td>
         </tr>
         <?php } ?>
       </tbody>

@@ -128,6 +128,15 @@
             </div>
           </div>
 
+          <?php }else{ ?>
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="kt">Password</label>
+                <input type="password" class="form-control"  name="password"   >
+              </div>
+            </div>
+
           <?php } ?>
         </div>
 
