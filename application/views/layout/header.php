@@ -49,13 +49,13 @@
        <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perhitungan Topsis </a>
         <ul class="dropdown-menu">
-        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kemuhammadiyahan">Kemuhammadiyahan</a></li>
-        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kinerja">Kinerja</a></li>
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kemuhammadiyahan&type=1">Kemuhammadiyahan</a></li>
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kinerja&type=1">Kinerja</a></li>
         </ul>
       </li>
 
       <li><a href="<?php echo base_url();?>perhitungan/borda?type=1">Perhitungan Borda</a></li>
-      <li><a href="#" onclick="alert('Under Development')">Check Akurasi</a></li>
+      <li><a href="<?php echo base_url();?>akurasi">Check Akurasi</a></li>
 
       <?php if($user->level=='admin'){ ?>
       <li class="dropdown">

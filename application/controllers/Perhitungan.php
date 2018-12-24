@@ -20,6 +20,11 @@ class Perhitungan extends CI_Controller{
       }else{
          $data['type'] = '';
       }
+         if($data['type']==1){
+            $group ='Medis';
+         }else{
+            $group ='Non Medis';
+         }
       $data['title'] = "Perhitung ".$category;
       $user = $this->GlobalModel->get_data('tbl_users', ['id_user' => $this->id_user])->row();
       $data['aspek_kemuhammadiyahan'] = $this->GlobalModel->get_kriteria('',1)->result();
@@ -34,9 +39,10 @@ class Perhitungan extends CI_Controller{
       $data['list_sub_kriteria_kemuhammadiyahan_prioritas'] = $this->GlobalModel->get_sub_kriteria_by_prioritas('',1)->result();
       $data['list_nilai'] = $this->GlobalModel->get_data('tbl_penilaian')->result();
       if($data['aspek']=='kemuhammadiyahan'){
-      $data['list_kriteria'] = $this->GlobalModel->get_kriteria('',1)->result();
+
+      $data['list_kriteria'] = $this->GlobalModel->get_kriteria('',1,$group)->result();
       }else{
-      $data['list_kriteria'] = $this->GlobalModel->get_kriteria('',2)->result();
+      $data['list_kriteria'] = $this->GlobalModel->get_kriteria('',2,$group)->result();
       }
       // echo count($data['list_kriteria']);die();
       $data['list_kriteria_prioritas'] = $this->GlobalModel->get_kriteria_by_prioritas()->result();
