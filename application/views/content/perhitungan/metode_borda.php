@@ -77,7 +77,7 @@
                   $nilai =0; 
                 }
                 echo $nilai;
-                $bobot_rangking =10-$n;
+                $bobot_rangking =20-$n;
                 $jumlah_nilai[$alternatif] += $nilai; 
                 if($n==$no){ 
                 $poin_borda[$alternatif] =  round($jumlah_nilai[$alternatif]*$bobot_rangking,4);
