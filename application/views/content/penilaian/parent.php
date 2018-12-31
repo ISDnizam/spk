@@ -19,6 +19,7 @@
         <th>Jabatan</th>
         <th>Kriteria</th>
         <th>Sub Kriteria</th>
+        <th>Tahun </th>
         <th>Nilai</th>
         
         <th width="100px">Aksi</th>
@@ -33,7 +34,9 @@
           <td><?php echo $key->nama_group_karyawan; ?></td>
           <td><?php echo $key->nama_kriteria; ?></td>
           <td><?php echo $key->nama_sub_kriteria; ?></td>
+          <td><?php echo $key->tahun; ?></td>
           <td><?php echo $key->nilai; ?></td>
+
           
           <td class="text-center">
             <a href="<?php echo base_url();?>penilaian/form_penilaian/<?php echo $key->id_penilaian; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>

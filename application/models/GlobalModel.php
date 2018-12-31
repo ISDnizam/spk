@@ -69,6 +69,8 @@ class GlobalModel extends CI_Model{
          return $data;
       }
 
+
+
       public function get_nilai_preferensi($id_groupaspek=false,$id_group=false, $limit=false){
       $this->db->select('*');
       $this->db->from('tbl_karyawan');
@@ -103,6 +105,8 @@ class GlobalModel extends CI_Model{
       $data = $this->db->get();
       return $data;
    }
+   
+
    public function get_kriteria($level=false, $id_groupaspek=false, $group=false){
       $this->db->select('*');
       $this->db->from('tbl_kriteria');
@@ -137,14 +141,16 @@ class GlobalModel extends CI_Model{
       $data = $this->db->get();
       return $data;
    }
-   public function get_penilaian($id_penilaian=false, $level=false, $id_karyawan=false, $id_sub_kriteria=false, $id_kriteria=false){
+   public function get_penilaian($id_penilaian=false, $level=false, $id_karyawan=false, $id_sub_kriteria=false, $id_kriteria=false,$id_tahun=false){
       $this->db->select('*');
       $this->db->from('tbl_penilaian');
+      $this->db->join('tbl_tahun', 'tbl_tahun.id_tahun=tbl_penilaian.id_tahun');
       $this->db->join('tbl_karyawan', 'tbl_karyawan.id_karyawan=tbl_penilaian.id_karyawan');
       $this->db->join('tbl_group_karyawan', 'tbl_karyawan.id_group_karyawan=tbl_group_karyawan.id_group_karyawan');
       $this->db->join('tbl_sub_kriteria', 'tbl_sub_kriteria.id_sub_kriteria=tbl_penilaian.id_sub_kriteria');
       $this->db->join('tbl_kriteria', 'tbl_kriteria.id_kriteria=tbl_sub_kriteria.id_kriteria');
       $this->db->join('tbl_users', 'tbl_users.id_user=tbl_penilaian.id_user');
+      
       if($id_penilaian){
       $this->db->where('tbl_penilaian.id_penilaian', $id_penilaian);
       }
@@ -156,6 +162,9 @@ class GlobalModel extends CI_Model{
       }
       if($id_kriteria){
       $this->db->where('tbl_kriteria.id_kriteria', $id_kriteria);
+      }
+      if($id_tahun){
+      $this->db->where('tbl_tahun.id_tahun', $id_tahun);
       }
       if($level=='pdm'){
       $this->db->where('tbl_kriteria.id_groupaspek', 1);

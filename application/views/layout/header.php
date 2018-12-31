@@ -59,16 +59,6 @@
 
       <li><a href="<?php echo base_url();?>akurasi">Check Akurasi</a></li>
 
-      <?php if($user->level=='admin'){ ?>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Lainnya </a>
-        <ul class="dropdown-menu">
-        <li><a href="#"  onclick="alert('Under Development')"> Data Golongan</a></li>
-        <li><a href="#"  onclick="alert('Under Development')">Data Users</a></li>
-        </ul>
-      </li>
-    <?php } ?>
-
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
