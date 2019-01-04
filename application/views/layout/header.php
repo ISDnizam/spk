@@ -40,17 +40,7 @@
         <li><a href="<?php echo base_url();?>kriteria/sub_kriteria">Data Sub Kriteria</a></li>
         </ul>
       </li>
-<<<<<<< Updated upstream
       <!-- <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li> -->
-=======
-      <?php } ?>
-  
-      <?php if($user->level=='pdm' or $user->level=='direksi' or $user->level=='user'){ ?>
-      <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li>
-      <?php } ?>
-
-      <?php if ($user->level!='user') { ?>}
->>>>>>> Stashed changes
       <li><a href="<?php echo base_url();?>perhitungan/smart">Perhitungan Smarter</a></li>
        <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perhitungan Topsis </a>
@@ -77,10 +67,6 @@
       <?php }else{ ?>
 
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
->>>>>>> master
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Penilaian </a>
         <ul class="dropdown-menu">
@@ -89,9 +75,6 @@
         </ul>
       </li>
 
-=======
-      <li><a href="<?php echo base_url();?>akurasi">Check Akurasi</a></li>
->>>>>>> Stashed changes
       <?php } ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
