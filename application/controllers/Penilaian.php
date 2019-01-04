@@ -46,6 +46,7 @@ class Penilaian extends CI_Controller{
       $data['list_sub_kriteria'] = $this->GlobalModel->get_sub_kriteria()->result();
             $data['list_golongan'] = $this->GlobalModel->get_data('tbl_golongan')->result();
       $data['list_group_karyawan'] = $this->GlobalModel->get_group_karyawan()->result();
+      $data['list_tahun'] = $this->GlobalModel->get_data('tbl_tahun')->result();
       $penilaian = $this->input->post('penilaian');
       if($penilaian){
         if($id_penilaian){
@@ -58,6 +59,7 @@ class Penilaian extends CI_Controller{
             $form['id_sub_kriteria'] = $penilaian[$key->id_kriteria]['id_sub_kriteria'];
             $form['id_karyawan'] = $id_karyawan;
             $form['id_user'] = $this->id_user;
+            $form['id_tahun'] = $this->input->post('id_tahun');
             $this->db->insert('tbl_penilaian', $form);
           }
           $message= flash_info('Nilai Karyawan telah berhasil diinput','get');
@@ -90,7 +92,15 @@ class Penilaian extends CI_Controller{
         }elseif($prioritas==3){
         $prioritas =1;
         }
-      }else{
+      }
+      else if ($jml_kriteria==2) {
+        if($prioritas==1){
+        $prioritas =2;
+        }elseif($prioritas==2){
+        $prioritas =1;
+        }
+      }
+      else{
         if($prioritas==1){
         $prioritas =4;
         }elseif($prioritas==2){

@@ -12,6 +12,15 @@ class Akurasi extends CI_Controller{
       template_interface('akurasi/parent', $data);
    }
 
+   function hapus_akurasi($id_akurasi){
+      if($id_akurasi){
+      $this->db->where('id_akurasi', $id_akurasi)->delete('tbl_akurasi');
+      $message= flash_info('akurasi telah berhasil dihapus','get');
+      $this->session->set_flashdata('message', $message);
+      redirect('akurasi');
+      }
+   }
+
   function form_akurasi($id_akurasi=false){
       if($id_akurasi){
       $data['title'] = "Edit Nilai Akurasi";

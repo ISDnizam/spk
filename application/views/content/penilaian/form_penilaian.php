@@ -18,7 +18,18 @@
         <div class="col-md-12">
 
 
-        <?php if($level=='direksi'){ ?>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="kt">tahun input</label>
+            <select name="id_tahun" id="id_tahun"  class="form-control" <?php echo $form;?>>
+              <option value="">Pilih tahun</option>
+              <?php foreach ($list_tahun as $key) { ?>
+                <option value="<?php echo $key->id_tahun;?>" ><?php echo $key->tahun; ?></option>
+              <?php } ?>
+            </select>
+          </div>
+        </div>
+
         <div class="col-md-6">
           <div class="form-group">
             <label for="kt">Jabatan</label>
@@ -30,7 +41,7 @@
             </select>
           </div>
         </div>
-      <?php } ?>
+      
 
           <div class="col-md-6">
             <div class="form-group">
@@ -122,4 +133,5 @@
   function show_karyawan(id){
     $('#form_karyawan').load('<?php echo base_url();?>karyawan/get_form_karyawan/'+id);
   }
+  
 </script>
