@@ -13,6 +13,7 @@ class Penilaian extends CI_Controller{
       $data['title'] = "Data Penilaian";
       $user = $this->GlobalModel->get_data('tbl_users', ['id_user' => $this->id_user])->row();
       $karyawan = $this->GlobalModel->get_karyawan($this->id_user)->row();
+<<<<<<< Updated upstream
       if(!empty($_GET['aspek'])){
          if($_GET['aspek']=='kemuhammadiyahan'){
           $level = 'pdm';
@@ -24,6 +25,10 @@ class Penilaian extends CI_Controller{
       }
       if($user->level=='user'){
       $data['list'] = $this->GlobalModel->get_penilaian('',$level, $karyawan->id_karyawan)->result();
+=======
+      if($user->level=='user'){
+      $data['list'] = $this->GlobalModel->get_penilaian('','', $karyawan->id_karyawan)->result();
+>>>>>>> Stashed changes
       }else{
       $data['list'] = $this->GlobalModel->get_penilaian('',$user->level)->result();
       }
