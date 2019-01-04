@@ -3,7 +3,7 @@
       <h4><?php echo $title;?></h4>
     </div>
     <div class="col-md-6 text-right">
-      <a href="<?php echo base_url();?>penilaian/form_penilaian" class="btn btn-primary">Input Nilai</a>
+      <a href="<?php echo base_url();?>akurasi/form_akurasi" class="btn btn-primary">Input akurasi</a>
     </div>
     <div class="col-md-12">
     <?php echo $this->session->flashdata('message'); ?>
@@ -18,7 +18,7 @@
         <th>Nilai B </th>
         <th>Nilai C </th>
         <th>Nilai D </th>
-        <th>Nilai E </th>
+        
         <th width="100px">Aksi</th>
       </tr>
     </thead>
@@ -30,10 +30,10 @@
           <td><?php echo $key->nilai_b; ?></td>
           <td><?php echo $key->nilai_c; ?></td>
           <td><?php echo $key->nilai_d; ?></td>
-          <td><?php echo $key->nilai_e; ?></td>
+          
           <td class="text-center">
-            <a href="<?php echo base_url();?>akurasi/form_akurasi/<?php echo $key->id_akurasi; ?>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
-            <a href="<?php echo base_url();?>akurasi/form_akurasi/<?php echo $key->id_akurasi; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini ?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+            
+            <a href="<?php echo base_url();?>akurasi/hapus_akurasi/<?php echo $key->id_akurasi; ?>" onclick="return confirm('Anda yakin ingin menghapus data ini ?')" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
           </td>
         </tr>
       <?php } ?>

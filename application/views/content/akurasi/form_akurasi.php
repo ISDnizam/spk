@@ -52,13 +52,7 @@
             </div>
           </div>
 
-                    <div class="col-md-6">
-            <div class="form-group">
-              <label for="kt">Nilai E</label>
-                <div id="form_karyawan">
-                <input type="" class="form-control"  name="akurasi[nilai_e]">
-              </div>
-            </div>
+                    
           </div>
         </div>
         <hr>
