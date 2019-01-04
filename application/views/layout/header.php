@@ -33,18 +33,14 @@
       <li><a href="<?php echo base_url();?>">Home</a></li>
       <?php if($user->level=='admin'){ ?>
       <li><a href="<?php echo base_url();?>karyawan"> Karyawan</a></li>
-       <li class="dropdown">
+      <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Kriteria </a>
         <ul class="dropdown-menu">
         <li><a href="<?php echo base_url();?>kriteria"> Data Kriteria</a></li>
         <li><a href="<?php echo base_url();?>kriteria/sub_kriteria">Data Sub Kriteria</a></li>
         </ul>
       </li>
-      <?php } ?>
-  
-      <?php if($user->level=='pdm' or $user->level=='direksi'){ ?>
-      <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li>
-      <?php } ?>
+      <!-- <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li> -->
       <li><a href="<?php echo base_url();?>perhitungan/smart">Perhitungan Smarter</a></li>
        <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perhitungan Topsis </a>
@@ -53,22 +49,33 @@
         <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kinerja&type=1">Kinerja</a></li>
         </ul>
       </li>
-
       <li><a href="<?php echo base_url();?>perhitungan/borda?type=1">Perhitungan Borda</a></li>
-
-
       <li><a href="<?php echo base_url();?>akurasi">Check Akurasi</a></li>
 
-      <?php if($user->level=='admin'){ ?>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Lainnya </a>
+      <?php }elseif($user->level=='pdm' or  $user->level=='direksi'){ ?>
+      <li><a href="<?php echo base_url();?>penilaian">Penilaian</a></li>
+      <li><a href="<?php echo base_url();?>perhitungan/smart">Perhitungan Smarter</a></li>
+       <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Perhitungan Topsis </a>
         <ul class="dropdown-menu">
-        <li><a href="#"  onclick="alert('Under Development')"> Data Golongan</a></li>
-        <li><a href="#"  onclick="alert('Under Development')">Data Users</a></li>
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kemuhammadiyahan&type=1">Kemuhammadiyahan</a></li>
+        <li><a href="<?php echo base_url();?>perhitungan/topsis?aspek=kinerja&type=1">Kinerja</a></li>
         </ul>
       </li>
-    <?php } ?>
+      <li><a href="<?php echo base_url();?>perhitungan/borda?type=1">Perhitungan Borda</a></li>
+      <li><a href="<?php echo base_url();?>akurasi">Check Akurasi</a></li>
+      <?php }else{ ?>
 
+
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Penilaian </a>
+        <ul class="dropdown-menu">
+        <li><a href="<?php echo base_url();?>penilaian?aspek=kemuhammadiyahan">Kemuhammadiyahan</a></li>
+        <li><a href="<?php echo base_url();?>penilaian?aspek=kinerja">Kinerja</a></li>
+        </ul>
+      </li>
+
+      <?php } ?>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">

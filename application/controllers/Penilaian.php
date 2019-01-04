@@ -1,20 +1,34 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Penilaian extends CI_Controller{
-   function __construct(){
-      parent::__construct();
-      $this->id_user = $this->session->userdata('id_user');
-      if(empty($this->session->userdata('id_user'))){
-        redirect('');
-      }
-   }
+     function __construct(){
+        parent::__construct();
+        $this->id_user = $this->session->userdata('id_user');
+        if(empty($this->session->userdata('id_user'))){
+          redirect('');
+        }
+     }
 
-   function index(){
+    function index(){
       $data['title'] = "Data Penilaian";
       $user = $this->GlobalModel->get_data('tbl_users', ['id_user' => $this->id_user])->row();
+      $karyawan = $this->GlobalModel->get_karyawan($this->id_user)->row();
+      if(!empty($_GET['aspek'])){
+         if($_GET['aspek']=='kemuhammadiyahan'){
+          $level = 'pdm';
+        }elseif($_GET['aspek']=='kinerja'){
+          $level = 'direksi';
+        }
+      }else{
+          $level ='';
+      }
+      if($user->level=='user'){
+      $data['list'] = $this->GlobalModel->get_penilaian('',$level, $karyawan->id_karyawan)->result();
+      }else{
       $data['list'] = $this->GlobalModel->get_penilaian('',$user->level)->result();
+      }
       template_interface('penilaian/parent', $data);
-   }
+    }
 
    function form_penilaian($id_penilaian=false){
       if($id_penilaian){
