@@ -77,7 +77,10 @@
       <?php }else{ ?>
 
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> master
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Penilaian </a>
         <ul class="dropdown-menu">
