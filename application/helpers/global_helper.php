@@ -21,6 +21,14 @@
 			return true;
 		}
 	}
+	if (!function_exists('update_roc_kriteria')) {
+		function update_roc_kriteria($id_kriteria, $bobot_roc){
+			$CI = & get_instance();
+			$data['bobot_roc'] 		   	= $bobot_roc;
+          	$CI->db->where('id_kriteria', $id_kriteria)->update('tbl_kriteria', $data);
+			return true;
+		}
+	}
 
 	if (!function_exists('update_bobot_akhir')) {
 		function update_bobot_akhir($id_kriteria=false, $bobot_akhir){

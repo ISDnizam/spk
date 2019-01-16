@@ -151,7 +151,7 @@
               $nilai_per_kriteria = get_nilai_per_kriteria($id_kriteria,$id_karyawan);
               ?>
               <td>
-                <?php  $bobot_ternormalisasi[$id_kriteria][$id_karyawan] = $nilai_matriks[$id_kriteria][$id_karyawan]*$kriteria->bobot_akhir;
+                <?php  $bobot_ternormalisasi[$id_kriteria][$id_karyawan] = $nilai_matriks[$id_kriteria][$id_karyawan]*$kriteria->bobot_roc;
                 echo round($bobot_ternormalisasi[$id_kriteria][$id_karyawan],4); ?>
               </td>
             <?php } ?>
