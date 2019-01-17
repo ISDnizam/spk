@@ -46,7 +46,8 @@
             } 
             $bobot_roc[$key->id_sub_kriteria] = round($total_bobot/$total_kriteria,3);
             echo $bobot_roc[$key->id_sub_kriteria];
-            update_roc($key->id_sub_kriteria, $bobot_roc[$key->id_sub_kriteria]); ?>
+            // update_roc($key->id_sub_kriteria, $bobot_roc[$key->id_sub_kriteria]); 
+            ?>
           </td>
         </tr>
         <?php } ?>
@@ -88,7 +89,7 @@
             } 
             $bobot_roc[$key->id_kriteria] = round($total_bobot/$total_kriteria,3);
             echo $bobot_roc[$key->id_kriteria];
-            update_roc_kriteria($key->id_kriteria, $bobot_roc[$key->id_kriteria]); 
+            // update_roc_kriteria($key->id_kriteria, $bobot_roc[$key->id_kriteria]); 
              ?>
           </td>
         </tr>
@@ -194,7 +195,8 @@
             } 
             $bobot_roc[$key->id_sub_kriteria] = round($total_bobot/$total_kriteria,3);
             echo $bobot_roc[$key->id_sub_kriteria];
-            update_roc($key->id_sub_kriteria, $bobot_roc[$key->id_sub_kriteria]); ?>
+            // update_roc($key->id_sub_kriteria, $bobot_roc[$key->id_sub_kriteria]);
+             ?>
           </td>
         </tr>
         <?php } ?>
@@ -236,7 +238,7 @@
             } 
             $bobot_roc[$key->id_kriteria] = round($total_bobot/$total_kriteria,3);
             echo $bobot_roc[$key->id_kriteria];
-            update_roc_kriteria($key->id_kriteria, $bobot_roc[$key->id_kriteria]); 
+            // update_roc_kriteria($key->id_kriteria, $bobot_roc[$key->id_kriteria]); 
             ?>
           </td>
         </tr>

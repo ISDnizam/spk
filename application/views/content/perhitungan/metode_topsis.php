@@ -124,6 +124,32 @@
     <?php  // =========================MATRIKS BOBOT TERNORMALISASI================================ // ?>
     <hr>
     <b>Matriks Bobot Ternormalisasi</b>
+     <?php $no=0; 
+     if($_GET['aspek']=='kinerja' and $_GET['type']==1){
+      $get_bobot_roc = $aspek_kinerja_medis;
+     }elseif($_GET['aspek']=='kinerja' and $_GET['type']==2){
+      $get_bobot_roc = $aspek_kinerja_non_medis;
+     }else{
+      $get_bobot_roc = $aspek_kemuhammadiyahan;
+     }
+    foreach ($get_bobot_roc as $key) { $no++;
+    $total_kriteria = count($get_bobot_roc);
+        $total_bobot=0;
+        for($i=1;$i<=$total_kriteria;$i++){
+          $x[$i][$key->prioritas] =0;
+            if($i >= $key->prioritas){
+              if($i==$total_kriteria){
+                $total = 1/$i;
+              }else{
+                $total = 1/$i;
+              }
+              $x[$i][$key->prioritas]+=$total;
+              $total_bobot += $x[$i][$key->prioritas];
+            }
+        } 
+        $bobot_roc[$key->id_kriteria] = round($total_bobot/$total_kriteria,3);
+         ?>
+    <?php } ?>
     <table width="100%" class="table table-striped table-bordered">
       <thead>
         <tr>
@@ -151,7 +177,7 @@
               $nilai_per_kriteria = get_nilai_per_kriteria($id_kriteria,$id_karyawan);
               ?>
               <td>
-                <?php  $bobot_ternormalisasi[$id_kriteria][$id_karyawan] = $nilai_matriks[$id_kriteria][$id_karyawan]*$kriteria->bobot_roc;
+                <?php  $bobot_ternormalisasi[$id_kriteria][$id_karyawan] = $nilai_matriks[$id_kriteria][$id_karyawan]*$bobot_roc[$kriteria->id_kriteria];
                 echo round($bobot_ternormalisasi[$id_kriteria][$id_karyawan],4); ?>
               </td>
             <?php } ?>
